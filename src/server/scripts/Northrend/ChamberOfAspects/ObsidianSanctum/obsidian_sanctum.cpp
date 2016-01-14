@@ -306,7 +306,7 @@ struct dummy_dragonAI : public ScriptedAI
 
         // By using SetRespawnTime() we will actually "spawn" the object with our defined time.
         // Once time is up, portal will disappear again.
-        if (portal && !portal->isSpawned())
+        if (portal)
             portal->SetRespawnTime(portalRespawnTime);
 
         // Unclear what are expected to happen if one drake has a portal open already
@@ -567,7 +567,7 @@ public:
         {
             dummy_dragonAI::EnterCombat(who);
 
-            events.ScheduleEvent(EVENT_ACOLYTE_VESPERON, 60000);
+            events.ScheduleEvent(EVENT_ACOLYTE_VESPERON, 20000);
         }
 
         void UpdateAI(uint32 diff) override
@@ -944,9 +944,6 @@ public:
             if (events.ExecuteEvent() == EVENT_VOID_BLAST)
             {
                 DoCastAOE(SPELL_VOID_BLAST);
-                ////twilight realm
-                //DoCastVictim(57620, true);
-                //DoCastVictim(57874, true);
                 me->RemoveAllAuras();
                 me->KillSelf();
             }
